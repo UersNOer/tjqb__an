@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="330dp"
+    android:layout_height="wrap_content"
+    android:background="#00000000"
+    android:orientation="vertical">
+
+    <!--版本更新-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+
+        android:layout_height="120dp"
+        android:background="#00000000">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/img_upversion" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorWhite">
+
+
+        <ImageView
+            android:id="@+id/tv_title"
+            android:layout_width="120dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:src="@mipmap/img_findnew"
+            android:textColor="@color/colorDarkBlue"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/contentTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="5dp"
+        android:maxEms="14"
+        android:text="尊敬的用户您好,为了给您带来\n更好的体验,请进行系统升级"
+        android:textColor="@color/black"
+        android:textSize="16dp" />
+
+    <LinearLayout
+        android:background="@color/colorWhite"
+
+        android:layout_width="match_parent"
+        android:layout_height="80dp">
+
+        <Button
+            android:id="@+id/bt_dowload"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/shape_bt_nom"
+            android:text="立即体验"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+
+</LinearLayout>

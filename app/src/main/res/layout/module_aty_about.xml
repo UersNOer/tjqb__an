@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@color/white"
+  android:divider="@drawable/line_size_x1dp_solid_white_minor"
+  android:showDividers="middle"
+  android:orientation="vertical">
+
+  <include layout="@layout/module_include_toolbar_base_light" />
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1">
+
+      <ImageView
+        android:id="@+id/iv_about_QR"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_centerInParent="true"
+          android:src="@mipmap/img_about"
+        tools:background="@color/gray_light" />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:layout_below="@+id/iv_about_QR"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="欢迎关注微信\n带你解锁拿钱新姿势"
+        android:textColor="@color/black_light"
+        android:textSize="15dp" />
+
+    </RelativeLayout>
+
+    <ImageView
+      android:layout_width="match_parent"
+      android:layout_height="300dp"
+      android:src="@drawable/line" />
+
+  </LinearLayout>
+
+</LinearLayout>

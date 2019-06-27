@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  >
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:divider="@drawable/line_size_x1dp_solid_white_minor"
+    android:dividerPadding="14dp"
+    android:orientation="vertical"
+    android:showDividers="end">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/action_group_height"
+      android:paddingLeft="14dp"
+      android:paddingRight="14dp"
+      android:divider="@drawable/line_size_x1dp_solid_white"
+      android:orientation="horizontal"
+      android:showDividers="middle">
+
+      <TextView
+        android:id="@+id/tv_input_number"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="芝麻分"
+        android:textColor="@color/black_minor"
+        android:textSize="15dp" />
+
+      <EditText
+        android:id="@+id/et_input_number"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:paddingLeft="12dp"
+        android:background="@color/transparent"
+        android:gravity="right|center"
+        android:hint="请填写您的芝麻分"
+        android:inputType="number"
+        android:textColor="@color/black_light"
+        android:textColorHint="@color/gray_medium"
+        android:textSize="14dp" />
+
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+      android:id="@+id/tv_apply_operate"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/action_group_height"
+      android:layout_marginTop="20dp"
+      android:layout_marginBottom="20dp"
+      android:layout_marginLeft="15dp"
+      android:layout_marginRight="15dp"
+      android:layout_gravity="bottom"
+      android:background="@drawable/button_bg"
+      android:gravity="center"
+      android:text="完成"
+      android:textColor="@color/black_light"
+      android:textSize="19dp" />
+
+
+  </FrameLayout>
+</LinearLayout>

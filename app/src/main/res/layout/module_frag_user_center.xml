@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/layout_content_group"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/mine_top_bg"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="68dp"
+            android:layout_height="68dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:src="@drawable/mine_head" />
+
+        <TextView
+            android:id="@+id/tv_user_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="17dp"
+            android:textColor="@color/white"
+            android:textSize="22dp"
+            tools:text="170****0000" />
+
+        <FrameLayout
+            android:id="@+id/layout_user_certification"
+            android:layout_width="92dp"
+            android:layout_height="17dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/mine_name_bg">
+
+            <TextView
+                android:id="@+id/tv_user_certification"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/mine_v"
+                android:drawableRight="@drawable/arrow"
+                android:drawablePadding="4dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="认证拿钱"
+                android:textColor="@color/brown"
+                android:textSize="12dp" />
+        </FrameLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_group_height_half_negative"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_group_height"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/layout_user_apply"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableLeft="@drawable/mine_bill"
+                        android:drawablePadding="11dp"
+                        android:gravity="center"
+                        android:text="我的申请"
+                        android:textColor="@color/black_light"
+                        android:textSize="15dp" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/layout_user_card"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:drawableLeft="@drawable/mine_card"
+                        android:drawablePadding="11dp"
+                        android:gravity="center"
+                        android:text="我的银行卡"
+                        android:textColor="@color/black_light"
+                        android:textSize="15dp" />
+
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/line_size_x1dp_solid_white_minor_padding_left_x26dp"
+                android:dividerPadding="15dp"
+                android:orientation="vertical"
+                android:showDividers="middle">
+
+                <FrameLayout
+                    android:id="@+id/layout_app_about"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:drawableLeft="@drawable/mine_our"
+                        android:drawableRight="@drawable/arrow"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical|left"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:text="关于优钱花"
+                        android:textColor="@color/black_light"
+                        android:textSize="15dp" />
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/layout_app_set"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:background="?android:attr/selectableItemBackground">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:drawableLeft="@drawable/setup"
+                        android:drawableRight="@drawable/arrow"
+                        android:drawablePadding="6dp"
+                        android:gravity="center_vertical|left"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:text="设置中心"
+                        android:textColor="@color/black_light"
+                        android:textSize="15dp" />
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/mine_text"
+            android:visibility="gone" />
+
+        <TextView
+            android:textColor="#D2D2D2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="48dp"
+            android:text="—优钱花一" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#D2D2D2"
+
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="25dp"
+            android:text=" 大小额货•值得侑赖" />
+    </FrameLayout>
+
+</LinearLayout>

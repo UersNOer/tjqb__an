@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <include layout="@layout/module_include_toolbar_base_light"/>
+
+  <TextView
+    android:background="@color/white"
+    android:textStyle="bold"
+    android:layout_width="match_parent"
+    android:layout_height="68dp"
+    android:paddingLeft="15dp"
+    android:paddingRight="15dp"
+    android:gravity="center_vertical"
+    android:text="设置中心"
+    android:textColor="#222222"
+    android:textSize="24dp" />
+
+  <LinearLayout
+    android:id="@+id/layout_setting_version"
+    android:layout_marginTop="9dp"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:paddingLeft="17dp"
+    android:paddingRight="20dp"
+    android:orientation="horizontal">
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:text="当前版本"
+      android:textColor="@color/black_light"
+      android:textSize="15dp" />
+    <TextView
+      android:id="@+id/tv_app_version"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="right|center_vertical"
+      tools:text="1.0.0" />
+
+
+
+  </LinearLayout>
+
+  <FrameLayout
+    android:id="@+id/layout_setting_login_out"
+    android:layout_marginTop="21dp"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/action_group_height"
+    android:background="?android:attr/selectableItemBackground"
+    >
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/white"
+      android:text="安全退出"
+      android:gravity="center"
+      android:textColor="#F73434"
+      android:textSize="19dp"
+      />
+
+
+  </FrameLayout>
+
+</LinearLayout>

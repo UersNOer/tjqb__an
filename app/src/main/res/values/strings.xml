@@ -1,0 +1,7 @@
+<resources>
+  <string name="app_name">优钱花</string>
+  <string name="tab_home_loan">借款</string>
+  <string name="tab_home_money">拿钱</string>
+  <string name="tab_home_home">首页</string>
+  <string name="tab_home_mine">我的</string>
+</resources>

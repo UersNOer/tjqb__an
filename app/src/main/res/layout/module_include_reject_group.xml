@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/layout_over_group"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:id="@+id/layout_head_group"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    android:minHeight="203dp"
+    android:orientation="vertical">
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="12dp"
+      android:src="@drawable/text" />
+    <TextView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="8dp"
+      android:text="费率低 / 秒到账"
+      android:textColor="@color/black_light"
+      android:textSize="14dp" />
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+      <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:layout_marginBottom="12dp"
+        android:layout_gravity="center">
+
+        <ImageView
+          android:id="@+id/iv_home"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginRight="16dp"
+          android:src="@drawable/home_conduct_2" />
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="6dp"
+          android:layout_alignParentTop="true"
+          android:layout_toRightOf="@+id/iv_home"
+          android:text="审核未通过"
+          android:textColor="@color/black_light"
+          android:textSize="21dp" />
+
+        <TextView
+          android:id="@+id/tv_head_more"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="9dp"
+          android:layout_alignParentBottom="true"
+          android:layout_toRightOf="@+id/iv_home"
+          android:textColor="@color/gray_medium"
+          android:textSize="12dp"
+          tools:text="更多借款请查看以下推荐" />
+
+      </RelativeLayout>
+
+
+    </FrameLayout>
+  </LinearLayout>
+  <LinearLayout
+    android:id="@+id/layout_more_group"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="@drawable/home_bg2"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="visible">
+
+    <LinearLayout
+      android:id="@+id/layout_more_group_title"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:paddingTop="25dp"
+      android:paddingBottom="10dp"
+      android:paddingLeft="15dp"
+      android:paddingRight="15dp">
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="借款推荐"
+        android:textColor="@color/black_light"
+        android:textSize="19dp" />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:drawableRight="@drawable/more"
+        android:gravity="right"
+        android:text="查看更多"
+        android:textColor="@color/black_light"
+        android:textSize="14dp" />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+      android:background="@color/transparent"
+      android:id="@+id/recycler_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+  </LinearLayout>
+
+</LinearLayout>

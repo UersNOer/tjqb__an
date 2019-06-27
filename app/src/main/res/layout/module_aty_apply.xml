@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="180dp"
+      android:background="@color/orange_light">
+
+      <ImageView
+        android:id="@+id/iv_step_indicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
+        android:layout_gravity="bottom|center_horizontal"
+        tools:src="@drawable/foundation_certificate_1" />
+    </FrameLayout>
+
+    <com.market.ssvip.white.view.widget.FixedViewPager
+      android:id="@+id/viewpager"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1">
+
+    </com.market.ssvip.white.view.widget.FixedViewPager>
+
+
+
+  </LinearLayout>
+
+  <include layout="@layout/module_include_toolbar_base_light"/>
+</FrameLayout>

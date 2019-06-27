@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 指纹/手势 -->
+    <color name="grey_a5a5a5">#A5A5A5</color>
+    <color name="grey_dde1e7">#DDE1E7</color>
+    <color name="warning_color">#f4511e</color>
+    <color name="success_color">#009688</color>
+    <color name="material_red_500">#F44336</color>
+    <color name="transparent">#00000000</color>
+    <color name="colorFirstText">#697d91</color>
+    <color name="colorGeneralBlue">#0074bc</color>
+    <color name="colorBlue">#4a90e2</color>
+    <color name="colorDarkBlue">#006DB0</color>
+    <color name="colorQQ">#FF4990E2</color>
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorRed">#FFF14848</color>
+    <color name="colorYellow">#f19715</color>
+    <color name="colorLightYellow">#f8E71C</color>
+    <color name="colorGreen">#FF7ED321</color>
+    <color name="colorLakeBlue">#31cce5</color>
+    <color name="colorHongbao">#ffabab</color>
+    <color name="colorDiamond">#37A6C2</color>
+
+    <color name="ml_gray">#cccccc</color>
+
+    <color name="membership_new_label">#FFF6D9</color>
+    <color name="membership_new_text">#FF8200</color>
+
+
+    <color name="guide_1">#A2F4EF</color>
+    <color name="guide_2">#F8D3D3</color>
+    <color name="guide_3">#89bef0</color>
+
+
+    <color name="material_red">#ffF44336</color>
+    <color name="material_green">#ff4CAF50</color>
+    <color name="material_blue">#ff03A9F4</color>
+    <color name="material_yellow">#ffFFEB3B</color>
+
+
+    <!--大河金服-->
+    <!--导航栏字体颜色-->
+    <color name="colorSelectedRed">#F14143</color>
+    <color name="colorSecondText">#999999</color>
+    <color name="colorUnselectedText">#666666</color>
+    <color name="colorDarkGreen">#39AF6F</color>
+    <color name="colorBackground">#f2f2f2</color>
+    <color name="colorGrayLine">#e6e6e6</color>
+    <color name="black">#333333</color>
+
+
+    <color name="colorAccent">#ffffff</color>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+
+
+</resources>

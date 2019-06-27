@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/layout_toolbar_root"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:clipToPadding="false"
+  android:orientation="vertical">
+
+  <FrameLayout
+    android:id="@+id/layout_toolbar_group"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/transparent">
+
+    <android.support.v7.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/toolbar_height"
+      android:layout_gravity="bottom"
+      app:elevation="0dp">
+
+      <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+          android:id="@+id/layout_toolbar_left"
+          android:layout_width="@dimen/toolbar_height"
+          android:layout_height="match_parent"
+          android:layout_alignParentLeft="true"
+          android:clickable="true"
+          android:visibility="invisible"
+          tools:visibility="visible">
+
+          <ImageView
+            android:id="@+id/iv_toolbar_left"
+            android:layout_width="17dp"
+            android:layout_height="17dp"
+            android:layout_gravity="center"
+            android:src="@drawable/back" />
+
+        </FrameLayout>
+
+
+        <LinearLayout
+          android:id="@+id/toolbar_center"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_toLeftOf="@id/layout_toolbar_right"
+          android:layout_toRightOf="@+id/layout_toolbar_left"
+          android:gravity="center_vertical"
+          android:orientation="horizontal">
+
+          <TextView
+            android:id="@+id/tv_toolbar_title"
+            style="@style/AppTheme.MyActionBar.TitleTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            tools:text="标题" />
+
+        </LinearLayout>
+
+        <FrameLayout
+          android:id="@+id/layout_toolbar_right"
+          android:layout_width="@dimen/toolbar_height"
+          android:layout_height="match_parent"
+          android:layout_alignParentRight="true"
+          android:clickable="true"
+          android:minWidth="@dimen/toolbar_height">
+
+          <!--<TextView-->
+          <!--android:id="@+id/tv_toolbar_right"-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="match_parent"-->
+          <!--android:paddingLeft="12dp"-->
+          <!--android:paddingRight="12dp"-->
+          <!--android:gravity="center"-->
+          <!--android:textColor="@color/black"-->
+          <!--android:textSize="14dp"-->
+          <!--android:visibility="gone"-->
+          <!--tools:text="确认"-->
+          <!--tools:visibility="gone" />-->
+
+          <ImageView
+            android:id="@+id/iv_toolbar_right"
+            android:layout_width="@dimen/toolbar_height"
+            android:layout_height="@dimen/toolbar_height"
+            android:visibility="gone" />
+
+        </FrameLayout>
+
+
+      </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+  </FrameLayout>
+
+</LinearLayout>

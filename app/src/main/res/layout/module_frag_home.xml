@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <LinearLayout
+    android:id="@+id/layout_apply_group"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:visibility="gone"
+    tools:visibility="visible"
+    >
+    <LinearLayout
+      android:id="@+id/layout_content_group"
+      android:layout_width="match_parent"
+      android:layout_height="203dp"
+      android:paddingLeft="20dp"
+      android:paddingRight="20dp"
+      android:background="@drawable/home_top_bg"
+      android:orientation="vertical">
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/text" />
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="费率低 / 秒到账"
+        android:textColor="@color/black_light"
+        android:textSize="14dp" />
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginTop="-98dp"
+      android:orientation="vertical">
+
+      <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="175dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        app:cardBackgroundColor="#262523"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:orientation="vertical">
+          <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="30dp"
+            android:gravity="center"
+            android:text="可借金额（元）"
+            android:textColor="@color/white_light_A70"
+            android:textSize="14dp" />
+          <TextView
+            android:id="@+id/tv_home_valid_number"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textColor="@color/white_light"
+            android:textSize="43dp"
+            tools:text="1200" />
+
+          <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:background="@drawable/corners_bottom_x12dp_solid_black_deep"
+            android:divider="@drawable/line_size_x1dp_solid_brown_light"
+            android:dividerPadding="14dp"
+            android:orientation="horizontal"
+            android:showDividers="middle">
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:gravity="center">
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="期限"
+                android:textColor="@color/white_light_A70"
+                android:textSize="14dp" />
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="15天"
+                android:textColor="@color/white_light"
+                android:textSize="14dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+              android:layout_weight="1"
+              android:gravity="center">
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="服务费率"
+                android:textColor="@color/white_light_A70"
+                android:textSize="14dp" />
+              <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="0.05%"
+                android:textColor="@color/white_light"
+                android:textSize="14dp" />
+
+            </LinearLayout>
+
+          </LinearLayout>
+
+        </LinearLayout>
+
+      </android.support.v7.widget.CardView>
+
+
+      <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <RelativeLayout
+          android:id="@+id/layout_home_loading_group"
+          android:layout_width="wrap_content"
+          android:layout_height="61dp"
+          android:layout_gravity="center"
+          android:visibility="gone">
+
+          <ImageView
+            android:id="@+id/iv_home_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="16dp"
+            android:src="@drawable/home_conduct" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/iv_home_loading"
+            android:text="订单审核中"
+            android:textColor="@color/black_light"
+            android:textSize="21dp" />
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="9dp"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/iv_home_loading"
+            android:text="订单已受理，请耐心等待..."
+            android:textColor="@color/gray_medium"
+            android:textSize="12dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+          android:id="@+id/layout_home_seek_group"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:orientation="vertical"
+          android:visibility="visible">
+          <SeekBar
+            android:id="@+id/seek_home"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:progressDrawable="@drawable/seek_bar_home_layer"
+            android:thumb="@drawable/seek"
+            tools:progress="100" />
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/seek_home"
+            android:text="500"
+            android:textColor="@color/gray_minor"
+            android:textSize="12dp" />
+
+          <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/seek_home"
+            android:text="1200"
+            android:textColor="@color/gray_minor"
+            android:textSize="12dp" />
+
+        </RelativeLayout>
+
+      </FrameLayout>
+
+      <TextView
+        android:id="@+id/tv_home_operate"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/action_group_height"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@drawable/selector_corners_home_button"
+        android:gravity="center"
+        android:text="立即拿钱"
+        android:textColor="@color/txt_home_button"
+        android:textSize="19dp" />
+
+      <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_marginBottom="19dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_gravity="center"
+          android:drawableLeft="@drawable/student"
+          android:drawablePadding="7dp"
+          android:text="不向学生提供服务"
+          android:textColor="#525864"
+          android:textSize="12dp"
+
+          />
+
+      </FrameLayout>
+
+    </LinearLayout>
+
+  </LinearLayout>
+
+  <include
+    layout="@layout/module_include_reject_group"
+    android:visibility="gone" />
+
+</FrameLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".presenter.MainAty">
+
+  <com.market.ssvip.white.view.widget.FixedViewPager
+    android:id="@+id/viewpager"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/tab_main_height">
+
+  </com.market.ssvip.white.view.widget.FixedViewPager>
+  <fragment
+    android:id="@+id/fragment_main_tab"
+    class="com.market.ssvip.white.presenter.TabBottomFrag"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/tab_main_height"
+    android:layout_gravity="bottom"
+    tools:layout="@layout/module_frag_tab_bottom" />
+
+</FrameLayout>
