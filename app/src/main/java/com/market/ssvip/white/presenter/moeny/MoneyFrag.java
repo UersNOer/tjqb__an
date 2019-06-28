@@ -26,6 +26,7 @@ import butterknife.BindView;
 import com.licola.llogger.LLogger;
 import com.market.ssvip.white.R;
 import com.market.ssvip.white.base.BaseFragment;
+import com.market.ssvip.white.mode.EnvManager;
 import com.market.ssvip.white.presenter.web.WebAty;
 import com.market.ssvip.white.view.SwipeRefreshUtils;
 import com.market.ssvip.white.view.WindowsController;
@@ -36,7 +37,7 @@ import com.market.ssvip.white.view.WindowsController;
  */
 public class MoneyFrag extends BaseFragment {
 
-  private static final String URL = "http://api.lpkjb.cn/dc/list.html";
+  private static final String URL = "http://api.lpkjb.cn/dc/list.html?key=com.market.ttdk&user_id="+ EnvManager.getEnvManager().getEnvUserId()+"&market=_meizu";
 
   @BindView(R.id.swipe_refresh)
   SwipeRefreshLayout swipeRefresh;

@@ -100,7 +100,7 @@ public class EnvManager {
                 Request.Builder requestBuilder = originalRequest.newBuilder()
                         .addHeader("Accept-Encoding", "gzip")
                         .addHeader("Accept", "application/json")
-                        .addHeader("appId", "5 ")
+                        .addHeader("appId", "5")
                         .addHeader("appKey", "com.market.ttdk")
                         .addHeader("appMarket", "_vivo")
                         .addHeader("deviceId", userPersistManager.getLatestDeviceId())

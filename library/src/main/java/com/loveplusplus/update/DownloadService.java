@@ -1,10 +1,13 @@
 package com.loveplusplus.update;
 
 import android.app.IntentService;
+import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -26,7 +29,9 @@ public class DownloadService extends IntentService {
     // 10-10 19:18:21.352: D/DownloadService(2253): 测试缓存：39899 10kb
     private static final int BUFFER_SIZE = 10 * 1024; // 8k ~ 32K
     private static final String TAG = "DownloadService";
-
+    private static final int YOUR_NOTIFICATION_ID = 0x002;
+    private static final String YOUR_CHANNEL_ID = "20190627";
+    private static final String YOUR_CHANNEL_NAME = "ssvip";
     private static final int NOTIFICATION_ID = 0;
 
     private NotificationManager mNotifyManager;
@@ -39,11 +44,18 @@ public class DownloadService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(YOUR_CHANNEL_ID, YOUR_CHANNEL_NAME, NotificationManager.IMPORTANCE_HIGH);
+            channel.enableVibration(false);
+            channel.setVibrationPattern(new long[]{0});
+            channel.setSound(null, null);
+            if (mNotifyManager != null) {
+                mNotifyManager.createNotificationChannel(channel);
+            }
+        }
         mBuilder = new NotificationCompat.Builder(this);
-
         String appName = getString(getApplicationInfo().labelRes);
         int icon = getApplicationInfo().icon;
-
         mBuilder.setContentTitle(appName).setSmallIcon(icon);
         String urlStr = intent.getStringExtra(Constants.APK_DOWNLOAD_URL);
         InputStream in = null;
@@ -135,7 +147,7 @@ public class DownloadService extends IntentService {
 
 
           if (Build.VERSION.SDK_INT >= 24) {
-              
+
 //            Uri contentUri = getUriForFile(getApplication(), "com.dhjf.dev.p2p.fileProvider", apkFile);
             Uri contentUri = getUriForFile(getApplication(), "com.market.ssvip.white.fileProvider", apkFile);
             intent.setDataAndType(contentUri, "application/vnd.android.package-archive");

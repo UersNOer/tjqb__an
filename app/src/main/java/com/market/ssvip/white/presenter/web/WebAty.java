@@ -1,9 +1,13 @@
 package com.market.ssvip.white.presenter.web;
 
 import android.Manifest;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Build;
@@ -41,6 +45,7 @@ import com.market.ssvip.white.base.AppBaseActivity;
 import com.market.ssvip.white.mode.EnvManager;
 import com.market.ssvip.white.mode.api.BasicsApi;
 import com.market.ssvip.white.utils.CheckUtils;
+import com.market.ssvip.white.utils.NotificationSetUtil;
 
 import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
@@ -80,7 +85,7 @@ public class WebAty extends AppBaseActivity {
 
     public static Intent makeIntent(Context context, String url) {
         Intent intent = new Intent(context, WebAty.class);
-        intent.putExtra(KEY_URL, url);
+        intent.putExtra(KEY_URL, url+"&key=com.market.ttdk&user_id="+EnvManager.getEnvManager().getEnvUserId()+"&market=_meizu");
         return intent;
     }
 
@@ -153,10 +158,24 @@ public class WebAty extends AppBaseActivity {
             }
 
             @Override
-            public void onPageFinished(WebView view, String url) {
+            public void onPageFinished(WebView view, final String url) {
                 LLogger.d(url);
                 if (url.contains("apk")) {
-                    goToDownload(WebAty.this, url);
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                        //判断是否需要开启通知栏功能
+//                        NotificationSetUtil.OpenNotificationSetting(mContext, new NotificationSetUtil.OnNextLitener() {
+//                            @Override
+//                            public void onNext() {
+//                                goToDownload(WebAty.this, url);
+//
+//                            }
+//                        });
+//                    }
+                    Intent intent= new Intent();
+                    intent.setAction("android.intent.action.VIEW");
+                    Uri content_url = Uri.parse(url);
+                    intent.setData(content_url);
+                    startActivity(intent);
 
                 }
             }
@@ -290,12 +309,21 @@ public class WebAty extends AppBaseActivity {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
     }
-
+    private void startDownloadService(){
+        flag = false;
+        Log.i("tag", "开始下载");
+        Intent intent = new Intent(WebAty.this.getApplicationContext(), DownloadService.class);
+        intent.putExtra("url", downloadUrl);
+        WebAty.this.startService(intent);
+    }
     public void goToDownload(Context context, String downloadUrl) {
 
         if (!flag) {
             return;
         }
+
+
+
         WebAty.this.downloadUrl=downloadUrl;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             boolean hasInstallPermission =context.getPackageManager().canRequestPackageInstalls();
@@ -304,11 +332,7 @@ public class WebAty extends AppBaseActivity {
                 return;
             }
         }
-        flag = false;
-        Log.i("tag", "开始下载");
-        Intent intent = new Intent(context.getApplicationContext(), DownloadService.class);
-        intent.putExtra("url", downloadUrl);
-        context.startService(intent);
+        startDownloadService();
 
 
     }
@@ -324,9 +348,9 @@ public class WebAty extends AppBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1009) {
-            Intent intent = new Intent(WebAty.this.getApplicationContext(), DownloadService.class);
-            intent.putExtra("url", downloadUrl);
-            WebAty.this.startService(intent);
+          startDownloadService();
         }
+    }
+    public  static void initNoti(){
     }
 }
