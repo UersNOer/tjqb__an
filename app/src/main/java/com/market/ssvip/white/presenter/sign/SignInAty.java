@@ -73,6 +73,8 @@ public class SignInAty extends AppBaseActivity {
   }
 
   private void onFetchCode(String phone) {
+    tvFetchCode.setEnabled(false);
+    tvFetchCode.setText("验证码正在发送...");
     EnvManager envManager = EnvManager.getEnvManager();
     envManager.getBasicsApi().operateSendSmsCode(envManager.getEnvDeviceId(),phone, BasicsApi.CODE_TYPE_LOGIN)
         .enqueue(
@@ -80,13 +82,17 @@ public class SignInAty extends AppBaseActivity {
               @Override
               public void onResponse(Call<Void> call, Response<Void> response) {
                 showToast("验证码已经发送");
+                tvFetchCode.setEnabled(true);
                 timeCountUtil=new TimeCountUtil(60000, 1000, tvFetchCode, 0);
                 timeCountUtil.start();
               }
 
               @Override
               public void onFailure(Call<Void> call, Throwable t) {
-                showToast(ExceptionHelper.mapperException(t));
+//                showToast(ExceptionHelper.mapperException(t));
+                showToast("验证码获取失败,请重新获取");
+                tvFetchCode.setEnabled(true);
+                tvFetchCode.setText("重新获取");
                 LLogger.e(t);
               }
             });
