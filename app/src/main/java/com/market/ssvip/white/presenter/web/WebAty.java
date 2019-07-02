@@ -1,6 +1,7 @@
 package com.market.ssvip.white.presenter.web;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -21,6 +22,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.DownloadListener;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
@@ -88,6 +91,7 @@ public class WebAty extends AppBaseActivity {
     ProgressBar progressBar;
 
     public static Intent makeIntent(Context context, String url) {
+
         Intent intent = new Intent(context, WebAty.class);
         intent.putExtra(KEY_URL, url + "&key=com.market.ttdk&user_id=" + EnvManager.getEnvManager().getEnvUserId() + "&market=_meizu");
         return intent;
@@ -101,9 +105,14 @@ public class WebAty extends AppBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        WebAty.this.deleteDatabase("webview.db");
+        WebAty.this.deleteDatabase("webviewCache.db");
+        webView.clearHistory();
+        webView.clearFormData();
+        getCacheDir().delete();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
 //                        //判断是否需要开启通知栏功能
-          closeAndroidPDialog();
+            closeAndroidPDialog();
         }
         initSettings(webView);
         initClient(webView);
@@ -311,7 +320,7 @@ public class WebAty extends AppBaseActivity {
         //允许JS代码
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
-
+        webView.clearCache(true);
         //禁用缩放
         webSettings.setDisplayZoomControls(false);
         webSettings.setBuiltInZoomControls(false);
@@ -325,7 +334,7 @@ public class WebAty extends AppBaseActivity {
         //允许缓存，设置缓存位置
 //    webSettings.setAppCacheEnabled(true);
 //    webSettings.setAppCachePath(webView.getContext().getDir("appcache", 0).getPath());
-
+        webSettings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         //允许WebView使用File协议
         webSettings.setAllowFileAccess(true);
         //不保存密码
@@ -337,6 +346,7 @@ public class WebAty extends AppBaseActivity {
         if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
+        clearWebViewCache();
     }
 
     private void startDownloadService() {
@@ -345,6 +355,13 @@ public class WebAty extends AppBaseActivity {
         Intent intent = new Intent(WebAty.this.getApplicationContext(), DownloadService.class);
         intent.putExtra("url", downloadUrl);
         WebAty.this.startService(intent);
+    }
+
+    public void clearWebViewCache() {
+// 清除cookie即可彻底清除缓存
+        CookieSyncManager.createInstance(this);
+        CookieManager.getInstance().removeAllCookie();
+
     }
 
     public void goToDownload(Context context, String downloadUrl) {
