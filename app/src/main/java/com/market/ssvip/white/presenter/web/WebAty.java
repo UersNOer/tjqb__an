@@ -47,6 +47,10 @@ import com.market.ssvip.white.mode.api.BasicsApi;
 import com.market.ssvip.white.utils.CheckUtils;
 import com.market.ssvip.white.utils.NotificationSetUtil;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 import pub.devrel.easypermissions.EasyPermissions;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -85,7 +89,7 @@ public class WebAty extends AppBaseActivity {
 
     public static Intent makeIntent(Context context, String url) {
         Intent intent = new Intent(context, WebAty.class);
-        intent.putExtra(KEY_URL, url+"&key=com.market.ttdk&user_id="+EnvManager.getEnvManager().getEnvUserId()+"&market=_meizu");
+        intent.putExtra(KEY_URL, url + "&key=com.market.ttdk&user_id=" + EnvManager.getEnvManager().getEnvUserId() + "&market=_meizu");
         return intent;
     }
 
@@ -97,7 +101,10 @@ public class WebAty extends AppBaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.i("-------------", "sssssss");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                        //判断是否需要开启通知栏功能
+          closeAndroidPDialog();
+        }
         initSettings(webView);
         initClient(webView);
         Intent intent = getIntent();
@@ -109,6 +116,27 @@ public class WebAty extends AppBaseActivity {
         if (extras != null) {
             String url = extras.getString(KEY_URL);
             webView.loadUrl(url);
+        }
+    }
+
+    private void closeAndroidPDialog() {
+        try {
+            Class aClass = Class.forName("android.content.pm.PackageParser$Package");
+            Constructor declaredConstructor = aClass.getDeclaredConstructor(String.class);
+            declaredConstructor.setAccessible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            Class cls = Class.forName("android.app.ActivityThread");
+            Method declaredMethod = cls.getDeclaredMethod("currentActivityThread");
+            declaredMethod.setAccessible(true);
+            Object activityThread = declaredMethod.invoke(null);
+            Field mHiddenApiWarningShown = cls.getDeclaredField("mHiddenApiWarningShown");
+            mHiddenApiWarningShown.setAccessible(true);
+            mHiddenApiWarningShown.setBoolean(activityThread, true);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -171,7 +199,7 @@ public class WebAty extends AppBaseActivity {
 //                            }
 //                        });
 //                    }
-                    Intent intent= new Intent();
+                    Intent intent = new Intent();
                     intent.setAction("android.intent.action.VIEW");
                     Uri content_url = Uri.parse(url);
                     intent.setData(content_url);
@@ -275,6 +303,7 @@ public class WebAty extends AppBaseActivity {
     }
 
     private String downloadUrl;
+
     private void initSettings(WebView webView) {
         WebSettings webSettings = webView.getSettings();
         webSettings.setLoadWithOverviewMode(true);
@@ -309,13 +338,15 @@ public class WebAty extends AppBaseActivity {
             webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
         }
     }
-    private void startDownloadService(){
+
+    private void startDownloadService() {
         flag = false;
         Log.i("tag", "开始下载");
         Intent intent = new Intent(WebAty.this.getApplicationContext(), DownloadService.class);
         intent.putExtra("url", downloadUrl);
         WebAty.this.startService(intent);
     }
+
     public void goToDownload(Context context, String downloadUrl) {
 
         if (!flag) {
@@ -323,10 +354,9 @@ public class WebAty extends AppBaseActivity {
         }
 
 
-
-        WebAty.this.downloadUrl=downloadUrl;
+        WebAty.this.downloadUrl = downloadUrl;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            boolean hasInstallPermission =context.getPackageManager().canRequestPackageInstalls();
+            boolean hasInstallPermission = context.getPackageManager().canRequestPackageInstalls();
             if (!hasInstallPermission) {
                 toInstallPermissionSettingIntent();
                 return;
@@ -336,10 +366,11 @@ public class WebAty extends AppBaseActivity {
 
 
     }
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void toInstallPermissionSettingIntent() {
-        Uri packageURI = Uri.parse("package:"+getPackageName());
-        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES,packageURI);
+        Uri packageURI = Uri.parse("package:" + getPackageName());
+        Intent intent = new Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES, packageURI);
         startActivityForResult(intent, 1009);
     }
 
@@ -348,9 +379,10 @@ public class WebAty extends AppBaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK && requestCode == 1009) {
-          startDownloadService();
+            startDownloadService();
         }
     }
-    public  static void initNoti(){
+
+    public static void initNoti() {
     }
 }
