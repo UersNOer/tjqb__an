@@ -52,8 +52,8 @@ public class UserFrag extends BaseFragment {
       Bundle savedInstanceState) {
     View rootView = super.onCreateView(inflater, container, savedInstanceState);
     int statusBarHeight = WindowsController.getStatusBarHeight(layoutContentGroup.getContext());
-    layoutContentGroup.setPadding(layoutContentGroup.getPaddingLeft(), statusBarHeight,
-        layoutContentGroup.getPaddingRight(), layoutContentGroup.getPaddingBottom());
+//    layoutContentGroup.setPadding(layoutContentGroup.getPaddingLeft(), statusBarHeight,
+//        layoutContentGroup.getPaddingRight(), layoutContentGroup.getPaddingBottom());
 
     tvUserNumber.setText(EnvManager.getEnvManager().getEnvUserName());
 

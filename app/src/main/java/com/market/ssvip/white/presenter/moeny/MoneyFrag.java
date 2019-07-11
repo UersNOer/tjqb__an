@@ -39,12 +39,10 @@ import com.market.ssvip.white.view.WindowsController;
  */
 public class MoneyFrag extends BaseFragment {
 
-  private static final String URL = "http://api.lpkjb.cn/dc/list.html?key=com.market.ttdk&user_id="+ EnvManager.getEnvManager().getEnvUserId()+"&market=_meizu";
 
   @BindView(R.id.swipe_refresh)
   SwipeRefreshLayout swipeRefresh;
-  @BindView(R.id.layout_content_group)
-  LinearLayout layoutContentGroup;
+
 
   WebView webView;
 
@@ -62,29 +60,12 @@ public class MoneyFrag extends BaseFragment {
     swipeRefresh.setOnRefreshListener(new OnRefreshListener() {
       @Override
       public void onRefresh() {
-        onLoadUrl(URL);
       }
     });
-    int statusBarHeight = WindowsController.getStatusBarHeight(mContext);
 
-    webView = new WebView(mContext);
-    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-        LayoutParams.MATCH_PARENT);
-    params.topMargin = statusBarHeight;
-    layoutContentGroup.addView(webView, params);
-
-    initSettings(webView);
-    initClient(webView);
-    onLoadUrl(URL);
-    clearWebViewCache();
     return rootView;
   }
-  public void clearWebViewCache() {
-// 清除cookie即可彻底清除缓存
-    CookieSyncManager.createInstance(getContext());
-    CookieManager.getInstance().removeAllCookie();
 
-  }
 
 
   @Override
