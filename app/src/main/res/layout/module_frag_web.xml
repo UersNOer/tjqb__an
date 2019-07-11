@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <com.youth.banner.Banner
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
@@ -24,6 +25,10 @@
                 app:indicator_height="8dp"
                 app:indicator_width="8dp" />
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/ry_topfour"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
         </LinearLayout>
 
     </ScrollView>

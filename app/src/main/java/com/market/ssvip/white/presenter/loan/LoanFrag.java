@@ -10,6 +10,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,10 +34,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.google.gson.Gson;
 import com.licola.llogger.LLogger;
 import com.market.ssvip.white.R;
 import com.market.ssvip.white.base.BaseFragment;
 import com.market.ssvip.white.mode.EnvManager;
+import com.market.ssvip.white.mode.bean.BannerBean;
+import com.market.ssvip.white.mode.bean.RedrectBean;
 import com.market.ssvip.white.mode.bean.UserBean;
 import com.market.ssvip.white.presenter.web.WebAty;
 import com.market.ssvip.white.utils.ExceptionHelper;
@@ -55,15 +60,18 @@ import static com.market.ssvip.white.mode.api.BasicsApi.CODE_TYPE_LOGIN;
  * @date 2018/10/31
  */
 public class LoanFrag extends BaseFragment {
+    private ArrayList<BannerBean> body = new ArrayList<>();
 
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout swipeRefresh;
     @BindView(R.id.banner)
     Banner banner;
+
+    @BindView(R.id.ry_topfour)
+    RecyclerView ryTopFout;
+    TopFourAdapter topFourAdapter;
     GlideImageLoader glideImageLoader = new GlideImageLoader();
 
-
-    ArrayList<String> bannerImageList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -84,6 +92,7 @@ public class LoanFrag extends BaseFragment {
         banner.setOnBannerClickListener(new OnBannerClickListener() {
             @Override
             public void OnBannerClick(int position) {
+                startActivity(WebAty.makeIntent(mContext, body.get(position - 1).accessUrl));
             }
         });
 
@@ -95,11 +104,7 @@ public class LoanFrag extends BaseFragment {
             }
 
 
-
-
-
         });
-
 
         return rootView;
     }
@@ -112,34 +117,58 @@ public class LoanFrag extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ryTopFout.setLayoutManager(new GridLayoutManager(getContext(), 4));
+        topFourAdapter = new TopFourAdapter();
+        ryTopFout.setAdapter(topFourAdapter);
         getBannerData();
+        getRedirectData();
+    }
+
+
+    public void getRedirectData() {
+        EnvManager.getEnvManager().getBasicsApi().getRedirect(EnvManager.getEnvManager().getEnvDeviceId(), "1", "com.market.ttdk", "_meizu", EnvManager.getEnvManager().getEnvUserId())
+                .enqueue(new Callback<ArrayList<RedrectBean>>() {
+
+
+                    @Override
+                    public void onResponse(Call<ArrayList<RedrectBean>> call, Response<ArrayList<RedrectBean>> response) {
+                        topFourAdapter.setData(getContext(), (ArrayList<RedrectBean>) response.body().subList(0, 4));
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<RedrectBean>> call, Throwable t) {
+                        Log.i("TAG", "失败" + t.toString());
+                    }
+                });
     }
 
 
     private void getBannerData() {
-//        EnvManager.getEnvManager().getBasicsApi().fetchUserByWithCode(EnvManager.getEnvManager().getEnvDeviceId(), phone, code, CODE_TYPE_LOGIN)
-//                .enqueue(new Callback<UserBean>() {
-//                    @Override
-//                    public void onResponse(Call<UserBean> call, Response<UserBean> response) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<UserBean> call, Throwable t) {
-//                    }
-//                });
+        EnvManager.getEnvManager().getBasicsApi().getBannerList("2", "1", "15")
+                .enqueue(new Callback<ArrayList<BannerBean>>() {
 
-        SetBannerViewImages();
+
+                    @Override
+                    public void onResponse(Call<ArrayList<BannerBean>> call, Response<ArrayList<BannerBean>> response) {
+                        body.clear();
+                        body.addAll(response.body());
+                        SetBannerViewImages();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<BannerBean>> call, Throwable t) {
+                    }
+                });
+
     }
 
-    private void SetBannerViewImages() {
-        bannerImageList.clear();
-        bannerImageList.add("http://img5.imgtn.bdimg.com/it/u=3300305952,1328708913&fm=26&gp=0.jpg");
-        bannerImageList.add("http://img2.imgtn.bdimg.com/it/u=1718395925,3485808025&fm=26&gp=0.jpg");
-        bannerImageList.add("http://img2.imgtn.bdimg.com/it/u=180868167,273146879&fm=214&gp=0.jpg");
-        bannerImageList.add("http://img0.imgtn.bdimg.com/it/u=3357786243,3135716437&fm=26&gp=0.jpg");
-//        banner.no
 
+    private void SetBannerViewImages() {
+        ArrayList<String> bannerImageList = new ArrayList<>();
+        for (BannerBean q : body) {
+            bannerImageList.add(q.bannerLink);
+        }
         banner.setImages(bannerImageList).setImageLoader(glideImageLoader).start();
     }
 
