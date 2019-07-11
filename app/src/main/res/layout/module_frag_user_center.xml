@@ -10,7 +10,7 @@
         android:id="@+id/layout_content_group"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:background="@drawable/mine_top_bg"
+        android:background="@drawable/mine_back"
         android:orientation="vertical">
 
         <ImageView
@@ -203,12 +203,12 @@
             android:visibility="gone" />
 
         <TextView
-            android:textColor="#D2D2D2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginBottom="48dp"
-            android:text="—优钱花一" />
+            android:text="—优钱花一"
+            android:textColor="#D2D2D2" />
 
         <TextView
             android:layout_width="wrap_content"

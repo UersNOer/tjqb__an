@@ -15,6 +15,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.webkit.JsPromptResult;
 import android.webkit.JsResult;
 import android.webkit.SslErrorHandler;
@@ -78,7 +80,14 @@ public class LoanFrag extends BaseFragment {
     initSettings(webView);
     initClient(webView);
     onLoadUrl(URL);
+    clearWebViewCache();
     return rootView;
+  }
+  public void clearWebViewCache() {
+// 清除cookie即可彻底清除缓存
+    CookieSyncManager.createInstance(getContext());
+    CookieManager.getInstance().removeAllCookie();
+
   }
 
   private void onLoadUrl(String url) {

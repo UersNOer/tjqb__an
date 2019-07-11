@@ -132,6 +132,7 @@ public class HomeFrag extends BaseFragment {
     return rootView;
   }
 
+
   public void setShowMore(int pageState) {
     this.showMore = pageState == PAGE_STATE_MORE;
     LLogger.d("是否显示更多:" + showMore);

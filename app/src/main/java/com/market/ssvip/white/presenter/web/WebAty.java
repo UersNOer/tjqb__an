@@ -91,9 +91,13 @@ public class WebAty extends AppBaseActivity {
     ProgressBar progressBar;
 
     public static Intent makeIntent(Context context, String url) {
-
         Intent intent = new Intent(context, WebAty.class);
         intent.putExtra(KEY_URL, url + "&key=com.market.ttdk&user_id=" + EnvManager.getEnvManager().getEnvUserId() + "&market=_meizu");
+        return intent;
+    }
+    public static Intent makeIntent(Context context, String url,int type) {
+        Intent intent = new Intent(context, WebAty.class);
+        intent.putExtra(KEY_URL, url );
         return intent;
     }
 
