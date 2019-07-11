@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -51,6 +52,7 @@ import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.listener.OnBannerClickListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static com.market.ssvip.white.mode.api.BasicsApi.CODE_TYPE_LOGIN;
@@ -70,6 +72,13 @@ public class LoanFrag extends BaseFragment {
     @BindView(R.id.ry_topfour)
     RecyclerView ryTopFout;
     TopFourAdapter topFourAdapter;
+
+
+    @BindView(R.id.ry_other)
+    RecyclerView ryOther;
+    OtherAdapter otherAdapter;
+
+
     GlideImageLoader glideImageLoader = new GlideImageLoader();
 
 
@@ -121,6 +130,13 @@ public class LoanFrag extends BaseFragment {
         ryTopFout.setLayoutManager(new GridLayoutManager(getContext(), 4));
         topFourAdapter = new TopFourAdapter();
         ryTopFout.setAdapter(topFourAdapter);
+
+        ryOther.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        otherAdapter = new OtherAdapter();
+        ryOther.setAdapter(otherAdapter);
+
+
         getBannerData();
         getRedirectData();
     }
@@ -133,7 +149,18 @@ public class LoanFrag extends BaseFragment {
 
                     @Override
                     public void onResponse(Call<ArrayList<RedrectBean>> call, Response<ArrayList<RedrectBean>> response) {
-                        topFourAdapter.setData(getContext(), (ArrayList<RedrectBean>) response.body().subList(0, 4));
+//                        ArrayList<RedrectBean> hot = new ArrayList<>();
+//                        ArrayList<RedrectBean> otehr = new ArrayList<>();
+//                        for (RedrectBean q : response.body()) {
+//                            if (q.getTagList() == null) {
+//                                otehr.add(q);
+//                            } else {
+//                                hot.add(q);
+//                            }
+//                        }
+
+                        topFourAdapter.setData(getContext(), response.body().subList(0,4));
+                        otherAdapter.setData(getContext(), response.body().subList(4,response.body().size()));
                     }
 
                     @Override

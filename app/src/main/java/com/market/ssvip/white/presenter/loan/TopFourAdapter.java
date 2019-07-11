@@ -14,6 +14,7 @@ import com.market.ssvip.white.R;
 import com.market.ssvip.white.mode.bean.RedrectBean;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +24,7 @@ public class TopFourAdapter extends RecyclerView.Adapter<TopFourAdapter.ViewHold
     ArrayList<RedrectBean> list = new ArrayList<>();
     Context context;
 
-    public void setData(Context context, ArrayList<RedrectBean> list) {
+    public void setData(Context context, List<RedrectBean> list) {
         this.context = context;
         this.list.clear();
         this.list.addAll(list);

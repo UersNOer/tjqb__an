@@ -35,7 +35,7 @@ public class OtherAdapter extends RecyclerView.Adapter<OtherAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_topfour, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_other, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -44,6 +44,10 @@ public class OtherAdapter extends RecyclerView.Adapter<OtherAdapter.ViewHolder> 
         if (context != null)
             Glide.with(context).load(list.get(i).getLogo()).into(viewHolder.ivHead);
         viewHolder.tvName.setText(list.get(i).getName());
+        viewHolder.tvLimit.setText(list.get(i).getAmountRange());
+        viewHolder.tvInfo.setText(list.get(i).getExplains());
+        viewHolder.tvLilv.setText(list.get(i).getRate());
+        viewHolder.tvTime.setText("/ "+list.get(i).getSuccessRate());
     }
 
     @Override
@@ -56,6 +60,15 @@ public class OtherAdapter extends RecyclerView.Adapter<OtherAdapter.ViewHolder> 
         ImageView ivHead;
         @BindView(R.id.tv_name)
         TextView tvName;
+
+        @BindView(R.id.tv_limit)
+        TextView tvLimit;
+        @BindView(R.id.tv_info)
+        TextView tvInfo;
+        @BindView(R.id.tv_lilv)
+        TextView tvLilv;
+        @BindView(R.id.tv_time)
+        TextView tvTime;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
