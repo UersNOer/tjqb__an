@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.market.ssvip.white.R;
 import com.market.ssvip.white.mode.bean.RedrectBean;
+import com.market.ssvip.white.presenter.web.WebAty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +43,18 @@ public class TopFourAdapter extends RecyclerView.Adapter<TopFourAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, final int i) {
         if (context != null)
             Glide.with(context).load(list.get(i).getLogo()).into(viewHolder.ivHead);
         viewHolder.tvName.setText(list.get(i).getName());
+        viewHolder.lin_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                context.startActivity(WebAty.makeIntent(context, list.get(i).getAccessUrl()));
+
+
+            }
+        });
     }
 
     @Override
@@ -57,6 +67,8 @@ public class TopFourAdapter extends RecyclerView.Adapter<TopFourAdapter.ViewHold
         ImageView ivHead;
         @BindView(R.id.tv_name)
         TextView tvName;
+        @BindView(R.id.lin_back)
+        LinearLayout lin_back;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

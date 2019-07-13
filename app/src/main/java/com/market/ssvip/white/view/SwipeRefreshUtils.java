@@ -13,7 +13,7 @@ import android.view.View;
 
 public class SwipeRefreshUtils {
 
-  public static final int DelayedTime = 250;
+  public static final int DelayedTime = 2500;
 
   public static void delayedLoading(final SwipeRefreshLayout swipeRefresh, final boolean isOpen) {
     if (swipeRefresh == null) {

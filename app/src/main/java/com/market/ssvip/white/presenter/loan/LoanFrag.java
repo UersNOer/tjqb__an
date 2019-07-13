@@ -109,6 +109,8 @@ public class LoanFrag extends BaseFragment {
         swipeRefresh.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh() {
+                getBannerData();
+                getRedirectData();
                 SwipeRefreshUtils.delayedLoading(swipeRefresh, false);
             }
 

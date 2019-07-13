@@ -9,6 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +27,23 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+
 import butterknife.BindView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import com.licola.llogger.LLogger;
 import com.market.ssvip.white.R;
 import com.market.ssvip.white.base.BaseFragment;
 import com.market.ssvip.white.mode.EnvManager;
+import com.market.ssvip.white.mode.bean.RedrectBean;
+import com.market.ssvip.white.presenter.loan.OtherAdapter;
 import com.market.ssvip.white.presenter.web.WebAty;
 import com.market.ssvip.white.view.SwipeRefreshUtils;
 import com.market.ssvip.white.view.WindowsController;
+
+import java.util.ArrayList;
 
 /**
  * @author LiCola
@@ -40,193 +52,69 @@ import com.market.ssvip.white.view.WindowsController;
 public class MoneyFrag extends BaseFragment {
 
 
-  @BindView(R.id.swipe_refresh)
-  SwipeRefreshLayout swipeRefresh;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
+
+    @BindView(R.id.ry_topfour)
+    RecyclerView ryOther;
+    OtherAdapter otherAdapter;
 
 
-  WebView webView;
-
-  @Override
-  protected int getLayoutId() {
-    return R.layout.module_frag_web;
-  }
-
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
-    View rootView = super.onCreateView(inflater, container, savedInstanceState);
-
-    swipeRefresh.setOnRefreshListener(new OnRefreshListener() {
-      @Override
-      public void onRefresh() {
-      }
-    });
-
-    return rootView;
-  }
-
-
-
-  @Override
-  public boolean onKeyDown(int keyCode, KeyEvent event) {
-    if (KeyEvent.KEYCODE_BACK == keyCode) {
-      if (onGoBack()) {
-        return true;
-      }
+    @Override
+    protected int getLayoutId() {
+        return R.layout.framgnet_mony;
     }
 
-    return super.onKeyDown(keyCode, event);
-  }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
-  private boolean onGoBack() {
-    if (webView == null) {
-      return false;
+        swipeRefresh.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getRedirectData();
+            }
+        });
+
+        return rootView;
     }
 
-    if (webView.canGoBack()) {
-      webView.goBack();
-      return true;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        ryOther.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        otherAdapter = new OtherAdapter();
+        ryOther.setAdapter(otherAdapter);
+        getRedirectData();
+
+    }
+    public void getRedirectData() {
+        EnvManager.getEnvManager().getBasicsApi().getRedirect(EnvManager.getEnvManager().getEnvDeviceId(), "2", "com.market.ttdk", "_meizu", EnvManager.getEnvManager().getEnvUserId())
+                .enqueue(new Callback<ArrayList<RedrectBean>>() {
+
+
+                    @Override
+                    public void onResponse(Call<ArrayList<RedrectBean>> call, Response<ArrayList<RedrectBean>> response) {
+                        otherAdapter.setData(getContext(),response.body());
+                    }
+
+                    @Override
+                    public void onFailure(Call<ArrayList<RedrectBean>> call, Throwable t) {
+                        Log.i("TAG", "失败" + t.toString());
+                    }
+                });
+
+        SwipeRefreshUtils.delayedLoading(swipeRefresh,false);
     }
 
-    return false;
-  }
 
-  private void onLoadUrl(String url) {
-    if (webView==null){
-      return;
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
     }
-    webView.loadUrl(url);
-  }
-
-  private void initClient(final WebView webView) {
-    WebViewClient client = new WebViewClient() {
-
-      @Override
-      public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//        webView.loadUrl(url);
-        startActivity(WebAty.makeIntent(mContext, url));
-        return true;
-      }
-
-      @Override
-      public void onPageStarted(WebView view, String url, Bitmap favicon) {
-        LLogger.d(url);
-      }
-
-      @Override
-      public void onPageFinished(WebView view, String url) {
-        LLogger.d(url);
-        SwipeRefreshUtils.delayedLoading(swipeRefresh, false);
-      }
-
-      @Override
-      public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
-        handler.proceed();    //表示等待证书响应
-        // handler.cancel();      //表示挂起连接，为默认方式
-        // handler.handleMessage(null);    //可做其他处理
-      }
-
-      @Override
-      public void onReceivedError(WebView view, int errorCode, String description,
-          String failingUrl) {
-        LLogger.d(errorCode, description, failingUrl);
-      }
-
-
-    };
-
-    WebChromeClient chromeClient = new WebChromeClient() {
-      @Override
-      public void onProgressChanged(WebView view, int newProgress) {
-//        LLogger.d(newProgress);
-      }
-
-      /**
-       * 支持javascript的警告框
-       * @param view
-       * @param url
-       * @param message
-       * @param result
-       * @return
-       */
-      @Override
-      public boolean onJsAlert(WebView view, String url, String message, final JsResult result) {
-        return super.onJsAlert(view, url, message, result);
-      }
-
-      /**
-       * 支持javascript的确认框
-       * @param view
-       * @param url
-       * @param message
-       * @param result
-       * @return
-       */
-      @Override
-      public boolean onJsConfirm(WebView view, String url, String message, JsResult result) {
-        return super.onJsConfirm(view, url, message, result);
-      }
-
-      /**
-       * 支持javascript输入框
-       * @param view
-       * @param url
-       * @param message
-       * @param defaultValue
-       * @param result
-       * @return
-       */
-      @Override
-      public boolean onJsPrompt(WebView view, String url, String message, String defaultValue,
-          JsPromptResult result) {
-
-        return super.onJsPrompt(view, url, message, defaultValue, result);
-      }
-    };
-
-    webView.setWebChromeClient(chromeClient);
-
-    webView.setWebViewClient(client);
-  }
-
-  private void initSettings(WebView webView) {
-    WebSettings webSettings = webView.getSettings();
-    webSettings.setLoadWithOverviewMode(true);
-    webSettings.setUseWideViewPort(true);
-    //允许JS代码
-    webSettings.setJavaScriptEnabled(true);
-    webSettings.setDomStorageEnabled(true);
-
-    //禁用缩放
-    webSettings.setDisplayZoomControls(false);
-    webSettings.setBuiltInZoomControls(false);
-
-    //禁用文字缩放
-    webSettings.setTextZoom(100);
-
-    //10M缓存，api 18后，系统自动管理。
-//    webSettings.setAppCacheMaxSize(10 * 1024 * 1024);
-
-    //允许缓存，设置缓存位置
-//    webSettings.setAppCacheEnabled(true);
-//    webSettings.setAppCachePath(webView.getContext().getDir("appcache", 0).getPath());
-
-    //允许WebView使用File协议
-    webSettings.setAllowFileAccess(true);
-    //不保存密码
-    webSettings.setSavePassword(false);
-
-    //自动加载图片
-    webSettings.setLoadsImagesAutomatically(true);
-
-    if (VERSION.SDK_INT >= VERSION_CODES.LOLLIPOP) {
-      webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
-    }
-  }
-
-  @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-  }
 }
