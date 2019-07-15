@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/swipe_refresh"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
@@ -10,10 +11,14 @@
 
         <TextView
             android:id="@+id/tv_title"
+            android:background="@color/white"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textColor="@color/black"
             android:gravity="center"
-            android:text="tssss" />
+            android:text="热门借款" />
 
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"

@@ -49,7 +49,8 @@ public class MoneyFrag extends BaseFragment {
   SwipeRefreshLayout swipeRefresh;
   @BindView(R.id.layout_content_group)
   LinearLayout layoutContentGroup;
-
+  @BindView(R.id.tv_title)
+          TextView tvTitle;
   WebView webView;
 
   @Override
@@ -74,7 +75,7 @@ public class MoneyFrag extends BaseFragment {
 
 
     layoutContentGroup.addView(webView);
-
+    tvTitle.setText("爆款大全");
     initSettings(webView);
     initClient(webView);
     onLoadUrl(URL);

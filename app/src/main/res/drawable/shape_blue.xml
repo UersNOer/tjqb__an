@@ -1,5 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-  <item android:drawable="@drawable/button_bg" android:state_enabled="true" />
-  <item android:drawable="@drawable/corners_x28dp_solid_white_a60" android:state_enabled="false" />
-</selector>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+  <corners
+      android:bottomLeftRadius="180dp"
+      android:bottomRightRadius="180dp"
+      android:topLeftRadius="180dp"
+      android:topRightRadius="180dp" />
+  <gradient
+      android:angle="180"
+      android:type="linear"
+      android:endColor="#197dff"
+      android:startColor="#197dff" />
+</shape>

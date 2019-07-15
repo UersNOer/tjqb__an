@@ -51,7 +51,8 @@ public class LoanFrag extends BaseFragment {
     @BindView(R.id.layout_content_group)
     LinearLayout layoutContentGroup;
     WebView webView;
-
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
     @Override
     protected int getLayoutId() {
         return R.layout.module_frag_web;
@@ -76,7 +77,7 @@ public class LoanFrag extends BaseFragment {
 
         webView = new WebView(mContext);
         layoutContentGroup.addView(webView);
-
+        tvTitle.setText("热门借款");
         initSettings(webView);
         initClient(webView);
         onLoadUrl(URL);
