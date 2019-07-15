@@ -45,7 +45,7 @@ import static android.icu.lang.UScript.COMMON;
  * @date 2018/10/29
  */
 
-public class MainAty extends FragmentActivity {
+public class MainAty extends AppBaseActivity {
 
 
     /**
@@ -77,17 +77,16 @@ public class MainAty extends FragmentActivity {
         return intent;
     }
 
-//  @Override
-//  protected int getLayoutId() {
-//    return ;
-//  }
+  @Override
+  protected int getLayoutId() {
+    return R.layout.module_aty_main;
+  }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.module_aty_main);
+//        setContentView(n);
         ButterKnife.bind(this);
-        StatusBarUtil.setStatusBarMode(this, true, R.color.white);
 
         try {
             //包名
