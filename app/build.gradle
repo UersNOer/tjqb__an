@@ -211,7 +211,7 @@ dependencies {
     testImplementation rootProject.ext.dependencies["json"]
     //idling需要注入到release版
     implementation rootProject.ext.dependencies["espresso-idling"]
-
+    implementation 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     testImplementation rootProject.ext.dependencies["junit"]
     testImplementation rootProject.ext.dependencies["mockito-core"]
     testImplementation rootProject.ext.dependencies["mockito-inline"]

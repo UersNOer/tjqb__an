@@ -1,6 +1,7 @@
 package com.market.ssvip.white.presenter.moeny;
 
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.http.SslError;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -9,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import butterknife.BindView;
 import com.licola.llogger.LLogger;
 import com.market.ssvip.white.R;
@@ -65,13 +69,11 @@ public class MoneyFrag extends BaseFragment {
         onLoadUrl(URL);
       }
     });
-    int statusBarHeight = WindowsController.getStatusBarHeight(mContext);
 
     webView = new WebView(mContext);
-    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-        LayoutParams.MATCH_PARENT);
-    params.topMargin = statusBarHeight;
-    layoutContentGroup.addView(webView, params);
+
+
+    layoutContentGroup.addView(webView);
 
     initSettings(webView);
     initClient(webView);

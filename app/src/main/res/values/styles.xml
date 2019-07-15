@@ -1,22 +1,20 @@
 <resources>
 
   <!-- Base application theme. -->
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+  <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <!-- 避免控件会顶到状态栏上 -->
+    <item name="android:fitsSystemWindows">true</item>
     <item name="colorAccent">@color/colorAccent</item>
-    <item name="windowActionBar">false</item>
-    <item name="android:windowBackground">@color/white_deep</item>
-    <item name="windowNoTitle">true</item>
-    <item name="android:windowNoTitle">true</item>
-    <item name="toolbarStyle">@style/ToolbarStyle</item>
+
   </style>
 
-  <style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">
-    <item name="contentInsetStart">0dp</item>
-    <item name="colorControlNormal">@android:color/white</item>
-  </style>
+  <!--<style name="ToolbarStyle" parent="Widget.AppCompat.Toolbar">-->
+    <!--<item name="contentInsetStart">0dp</item>-->
+    <!--<item name="colorControlNormal">@android:color/white</item>-->
+  <!--</style>-->
 
   <style name="AppTheme.MyActionBar.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
     <item name="android:textColor">@color/black_light</item>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.licola.llogger.LLogger;
 import com.market.ssvip.white.mode.EnvManager;
@@ -34,6 +35,7 @@ public class IntroAty extends AppCompatActivity {
         WindowsController.setTranslucentWindows(this);
 
         boolean emptyUser = EnvManager.getEnvManager().isEmptyUser();
+        Log.i("TAG", emptyUser + "");
 //    emptyUser = false;
         if (emptyUser) {
             delayToSign();
@@ -41,17 +43,21 @@ public class IntroAty extends AppCompatActivity {
             jumpMainByType();
         }
     }
+
     private void jumpMainByType() {
-        LLogger.d("网络判断app模式");
+        Log.i("TAG","网络判断app模式");
         EnvManager envManager = EnvManager.getEnvManager();
         envManager.getBasicsApi().fetchVersion(envManager.getEnvDeviceId()).enqueue(new Callback<VersionBean>() {
             @Override
             public void onResponse(Call<VersionBean> call, Response<VersionBean> response) {
+                Log.i("TAG", response.body().toString());
+                Log.i("TAG", "111111111111111!");
                 toMain(response.body());
             }
 
             @Override
             public void onFailure(Call<VersionBean> call, Throwable t) {
+                Log.i("TAG", "222222222222222222");
                 VersionBean versionBean = new VersionBean();
                 versionBean.setModel(2);
                 versionBean.setStatus(0);
@@ -61,7 +67,7 @@ public class IntroAty extends AppCompatActivity {
     }
 
     private void toMain(final VersionBean versionBean) {
-        LLogger.d("延迟跳转主页面");
+        Log.i("TAG","延迟跳转主页面");
         findViewById(R.id.layout_intro_group).postDelayed(new Runnable() {
             @Override
             public void run() {
