@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.market.ssvip.white.mode.EnvManager;
+import com.tencent.bugly.crashreport.CrashReport;
 
 /**
  * @author LiCola
@@ -23,6 +24,7 @@ public class MyApplication extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+        CrashReport.initCrashReport(getApplicationContext(), "a1e2097a4f", false);
 
 
     }

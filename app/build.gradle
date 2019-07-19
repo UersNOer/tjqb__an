@@ -28,6 +28,10 @@ android {
                 ]
             }
         }
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' , 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
 
     }
 
@@ -168,7 +172,7 @@ tasks.withType(JavaCompile) { javaOptions ->
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation rootProject.ext.dependencies["llogger"]
     implementation rootProject.ext.dependencies["multidex"]
     implementation rootProject.ext.dependencies["support-annotations"]
@@ -179,23 +183,17 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
     annotationProcessor rootProject.ext.dependencies["butterknife-compiler"]
-
     implementation rootProject.ext.dependencies["reversesuper-annotation"]
     annotationProcessor rootProject.ext.dependencies["reversesuper-compiler"]
-
     implementation rootProject.ext.dependencies["okhttp"]
     implementation rootProject.ext.dependencies["retrofit2"]
     implementation rootProject.ext.dependencies["retrofit2-converter-gson"]
-
     implementation rootProject.ext.dependencies["glide"]
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
     implementation rootProject.ext.dependencies["glide-okhttp3-integration"]
     implementation rootProject.ext.dependencies["glide-transformations"]
-
     testImplementation rootProject.ext.dependencies["junit"]
-
     //support
-
     implementation rootProject.ext.dependencies["support-compat"]
     implementation rootProject.ext.dependencies["support-core-utils"]
     implementation rootProject.ext.dependencies["support-core-ui"]
@@ -216,17 +214,14 @@ dependencies {
     testImplementation rootProject.ext.dependencies["mockito-core"]
     testImplementation rootProject.ext.dependencies["mockito-inline"]
     testImplementation rootProject.ext.dependencies["hamcrest"]
-
     androidTestImplementation rootProject.ext.dependencies["mockito-android"]
     androidTestImplementation rootProject.ext.dependencies["mockito-core"]
     androidTestImplementation rootProject.ext.dependencies["runner"]
     androidTestImplementation rootProject.ext.dependencies["rules"]
     androidTestImplementation rootProject.ext.dependencies["junit"]
-
     androidTestImplementation rootProject.ext.dependencies["espresso-core"]
     androidTestImplementation rootProject.ext.dependencies["espresso-contrib"]
     androidTestImplementation rootProject.ext.dependencies["espresso-intents"]
-
     //Resolve conflicts between main and test APK:
     androidTestImplementation rootProject.ext.dependencies["support-compat"]
     androidTestImplementation rootProject.ext.dependencies["support-core-utils"]
@@ -239,4 +234,5 @@ dependencies {
     androidTestImplementation rootProject.ext.dependencies["recyclerview-v7"]
     androidTestImplementation rootProject.ext.dependencies["cardview-v7"]
     androidTestImplementation rootProject.ext.dependencies["gridlayout-v7"]
+    implementation files('src/libs/bugly_crash_release.jar')
 }

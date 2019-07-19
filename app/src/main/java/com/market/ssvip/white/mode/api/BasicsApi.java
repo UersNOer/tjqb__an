@@ -1,13 +1,17 @@
 package com.market.ssvip.white.mode.api;
 
 import com.market.ssvip.white.mode.bean.ProductItemBean;
+import com.market.ssvip.white.mode.bean.RandomUrlBean;
 import com.market.ssvip.white.mode.bean.UserBean;
 import com.market.ssvip.white.mode.bean.UserOrderApplyBean;
 import com.market.ssvip.white.mode.bean.UserOrderStateBean;
 import com.market.ssvip.white.mode.bean.VersionBean;
+
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 /**
@@ -16,34 +20,39 @@ import retrofit2.http.Query;
  */
 public interface BasicsApi {
 
-  int CODE_TYPE_BASE = 0;
-  int CODE_TYPE_REGISTER = 1;
-  int CODE_TYPE_LOGIN = 2;
-  //获得短信验证码
-  @GET("/s1/sms/sendSms")
-  Call<Void> operateSendSmsCode(@Query("deviceId") String deviceId,@Query("phone") String phone, @Query("type") int type);
-  //验证码登陆
-  @GET("/s1/clientUser/smsLogin/app")
-  Call<UserBean> fetchUserByWithCode(@Query("deviceId") String deviceId,@Query("phone") String phone, @Query("code") String code,@Query("type") int type);
+    int CODE_TYPE_BASE = 0;
+    int CODE_TYPE_REGISTER = 1;
+    int CODE_TYPE_LOGIN = 2;
 
-  @GET("/s1/action/save")
-  Call<Void> operateActionClickRecord(@Query("deviceId") String deviceId,@Query("userId") String userId,
-      @Query("action") String action);
+    //获得短信验证码
+    @GET("/s1/sms/sendSms")
+    Call<Void> operateSendSmsCode(@Query("deviceId") String deviceId, @Query("phone") String phone, @Query("type") int type);
 
-  @GET("/s1/apps/version/model")
-  Call<VersionBean> fetchVersion(@Query("deviceId") String deviceId);
+    //验证码登陆
+    @GET("/s1/clientUser/smsLogin/app")
+    Call<UserBean> fetchUserByWithCode(@Query("deviceId") String deviceId, @Query("phone") String phone, @Query("code") String code, @Query("type") int type);
 
-  @GET("/s1/order/query")
-  Call<UserOrderStateBean> fetchUserApplyOrder(@Query("deviceId") String deviceId,@Query("userId") String userId);
+    @GET("/s1/action/save")
+    Call<Void> operateActionClickRecord(@Query("deviceId") String deviceId, @Query("userId") String userId,
+                                        @Query("action") String action);
 
-  String SIGN="RgUfwcoJbWVPmT2dghPm4y6jRKF6i4";
+    @GET("/s1/apps/version/model")
+    Call<VersionBean> fetchVersion(@Query("deviceId") String deviceId);
 
-  @GET("http://interface.vip-black.com/products/list")
-  Call<List<ProductItemBean>> fetchProductList(@Query("deviceId") String deviceId,@Query("sign") String sign);
+    @GET("/s1/order/query")
+    Call<UserOrderStateBean> fetchUserApplyOrder(@Query("deviceId") String deviceId, @Query("userId") String userId);
 
-  @GET("/s1/order/submit")
-  Call<UserOrderApplyBean> operateUserApply(@Query("deviceId") String deviceId,@Query("userId") String userId,
-      @Query("amount") int amount, @Query("contacts") String contactsJson,
-      @Query("idCard") String idCardJson, @Query("zhima") String zhimaJson);
+    String SIGN = "RgUfwcoJbWVPmT2dghPm4y6jRKF6i4";
 
+    @GET("http://interface.vip-black.com/products/list")
+    Call<List<ProductItemBean>> fetchProductList(@Query("deviceId") String deviceId, @Query("sign") String sign);
+
+    @GET("/s1/order/submit")
+    Call<UserOrderApplyBean> operateUserApply(@Query("deviceId") String deviceId, @Query("userId") String userId,
+                                              @Query("amount") int amount, @Query("contacts") String contactsJson,
+                                              @Query("idCard") String idCardJson, @Query("zhima") String zhimaJson);
+
+
+    @GET("/s1/product/ydjdqProductOne")
+    Call<RandomUrlBean> getRandomUrl(@Query("groupId") String deviceId);
 }
